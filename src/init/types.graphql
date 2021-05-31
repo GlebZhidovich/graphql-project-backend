@@ -2,13 +2,13 @@
 #import "../bus/task/types.graphql"
 
 type Query {
-
+  task(id: ID!): String
 }
 
-type Mutation {
+# type Mutation {
 
-}
+# }
 
-type Subscription {
+# type Subscription {
 
-}
+# }

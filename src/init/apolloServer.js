@@ -15,9 +15,9 @@ const apolloServer = new ApolloServer({
   },
   playground: {
     settings: {
-      "request.credentials": "include"
-    }
-  }
+      'request.credentials': 'include',
+    },
+  },
 });
 
 // Endpoints
