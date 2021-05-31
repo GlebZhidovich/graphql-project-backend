@@ -1,0 +1,14 @@
+#import "../bus/customer/types.graphql"
+#import "../bus/task/types.graphql"
+
+type Query {
+
+}
+
+type Mutation {
+
+}
+
+type Subscription {
+
+}
