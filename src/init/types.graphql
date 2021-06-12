@@ -5,9 +5,9 @@ type Query {
   task(id: ID!): String
 }
 
-# type Mutation {
-
-# }
+type Mutation {
+  signUp(customer: CustomerInput!): Customer!
+}
 
 # type Subscription {
 

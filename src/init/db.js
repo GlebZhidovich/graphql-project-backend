@@ -1,35 +1,33 @@
-import mongoose from 'mongoose';
+import { Pool } from 'pg';
 
-const server = 'lab.lectrum.io';
-const port = 37019;
-const database = void 0; // Put your own DB name, it can be any name
-
-class Database {
-  constructor() {
-    this._verify();
-    this._connect();
+export const checkDB = async () => {
+  try {
+    const pool = new Pool();
+    const PoolClient = await pool.connect();
+    PoolClient.release();
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
   }
+};
 
-  _verify() {
-    if (!database) {
-      throw new Error('You should specify DB name');
-    }
+export const makeDbRequest = async (query) => {
+  const pool = new Pool();
+  const pgItem = await pool.connect();
+  try {
+    const res = await pgItem.query(query);
+    return {
+      value: res,
+    };
+  } catch (e) {
+    return {
+      error: e.message,
+      value: {
+        rows: [],
+        rowCount: 0,
+      },
+    };
+  } finally {
+    pgItem.release();
   }
-
-  _connect() {
-    mongoose
-      .connect(`mongodb://${server}:${port}/${database}`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then(() => {
-        console.log('🚀 Database connection successful');
-      })
-      .catch((err) => {
-        console.error(`❌ Database connection error: ${err.message}`);
-      });
-    mongoose.set('useCreateIndex', true);
-  }
-}
-
-new Database();
+};

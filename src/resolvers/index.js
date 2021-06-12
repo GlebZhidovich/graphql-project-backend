@@ -4,6 +4,6 @@ import { Subscription } from './subscription';
 
 export const resolvers = {
   Query,
-  // Mutation,
+  Mutation,
   // Subscription,
 };
